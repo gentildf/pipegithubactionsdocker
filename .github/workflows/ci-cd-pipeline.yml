@@ -20,7 +20,12 @@ jobs:
       run: docker build -t my-app .
 
     - name: Test Docker image
-      run: docker run my-app
+      run: docker run --name my-app-container my-app
+
+    - name: Stop and remove Docker container
+      run: |
+        docker stop my-app-container
+        docker rm my-app-container
 
     - name: Clean up
       run: docker rmi my-app
